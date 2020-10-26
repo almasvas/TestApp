@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace TestApp.Classes
 {
-    class GetData
+    public class GetData
     {
+        public static string Get(string host)
+        {
+            var result = "";
+            
+            return result;
+        }
     }
 }

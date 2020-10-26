@@ -9,7 +9,7 @@ namespace TestApp.Classes
 {
     public class GetHeader
     {
-        public static string Get(string url)
+        public static string[] Get(string url)
         {
             using (var client = new HttpClient())
             {
@@ -17,8 +17,9 @@ namespace TestApp.Classes
                 HttpResponseMessage response = client.GetAsync("").Result;
                 response.EnsureSuccessStatusCode();
                 string result = response.Content.ReadAsStringAsync().Result;
-                Console.WriteLine("Result: " + result);
-                return result;
+                string[] resArray = result.Split(',');
+                
+                return resArray;
             }                        
         }
     }

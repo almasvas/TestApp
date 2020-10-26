@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestApp.Classes
 {
-    class ClearData
+    public class ClearData
     {
+        public static void Clear(string host)
+        {
+
+        }
     }
 }

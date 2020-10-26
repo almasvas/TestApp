@@ -23,9 +23,13 @@ namespace TestApp
         private void button1_Click(object sender, EventArgs e)
         {
             string host = ConfigurationManager.AppSettings["RemoteHost"];
-            new Thread(() => GetHeader.Get(host)).Start();
+            Task task = new Task(() => ProcessingData.Process(host));
+            task.Start();
+        }
 
-            var result = GetHeader.Get(host);
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

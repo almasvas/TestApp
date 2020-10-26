@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace TestApp.Classes
 {
-    class SendData
+    public class SendData
     {
+        public static void Send(string host, string data)
+        {
+            
+        }
     }
 }
