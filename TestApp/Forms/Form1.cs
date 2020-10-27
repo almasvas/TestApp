@@ -25,11 +25,6 @@ namespace TestApp
             string host = ConfigurationManager.AppSettings["RemoteHost"];
             Task task = new Task(() => ProcessingData.Process(host));
             task.Start();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
+        }       
     }
 }

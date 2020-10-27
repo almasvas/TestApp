@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace TestApp.Classes
 {
@@ -10,7 +7,20 @@ namespace TestApp.Classes
     {
         public static void Clear(string host)
         {
-
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    Uri uri = new Uri(host + "clear");
+                    HttpResponseMessage response = client.PostAsync(uri, null).Result;
+                    response.EnsureSuccessStatusCode();
+                    string result = response.Content.ReadAsStringAsync().Result; 
+                }
+            }
+            catch(Exception e)
+            {
+                throw new Exception($"Произошла ошибка во время запроса на очистку данных: {e.Message}");
+            }            
         }
     }
 }

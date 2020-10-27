@@ -1,26 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TestApp.Classes
 {
     public class GetHeader
     {
-        public static string[] Get(string url)
+        public static string[] Get(string host)
         {
-            using (var client = new HttpClient())
+            try
             {
-                client.BaseAddress = new Uri(url + "headers");
-                HttpResponseMessage response = client.GetAsync("").Result;
-                response.EnsureSuccessStatusCode();
-                string result = response.Content.ReadAsStringAsync().Result;
-                string[] resArray = result.Split(',');
-                
-                return resArray;
-            }                        
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(host + "headers");
+                    HttpResponseMessage response = client.GetAsync("").Result;
+                    response.EnsureSuccessStatusCode();
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    string[] resArray = result.Split(',');
+
+                    return resArray;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Произошла ошибка во время запроса списка идентификаторов: {e.Message}");
+            }
         }
     }
 }

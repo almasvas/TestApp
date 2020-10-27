@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace TestApp.Classes
 {
@@ -10,9 +7,21 @@ namespace TestApp.Classes
     {
         public static string Get(string host)
         {
-            var result = "";
-            
-            return result;
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(host + "data");
+                    HttpResponseMessage response = client.GetAsync("").Result;
+                    response.EnsureSuccessStatusCode();
+                    string result = response.Content.ReadAsStringAsync().Result;
+                    return result;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Произошла ошибка во время запроса данных: {e.Message}");
+            }
         }
     }
 }
